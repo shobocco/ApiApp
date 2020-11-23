@@ -3,13 +3,15 @@ package jp.techacademy.shirou.ogata.apiapp
 import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 
-open class FavoriteShop: RealmObject() {
+open class FavoriteShop: RealmObject(),Serializable {
     @PrimaryKey
     var id: String = ""
     var imageUrl: String = ""
     var name: String = ""
     var url: String = ""
+    var address:String = ""
 
     companion object {
         fun findAll(): List<FavoriteShop> = // お気に入りのShopを全件取得
@@ -28,6 +30,7 @@ open class FavoriteShop: RealmObject() {
                         realm.copyFromRealm(it)
                     }
             }
+
 
         fun insert(favoriteShop: FavoriteShop) = // お気に入り追加
             Realm.getDefaultInstance().executeTransaction {

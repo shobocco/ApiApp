@@ -1,4 +1,5 @@
 package jp.techacademy.shirou.ogata.apiapp
+import java.io.Serializable
 import com.google.gson.annotations.SerializedName
 
 
@@ -20,8 +21,10 @@ data class Shop(
     @SerializedName("logo_image")
     val logoImage: String,
     @SerializedName("name")
-    val name: String
-)
+    val name: String,
+    @SerializedName("address")
+    var address: String
+):Serializable
 
 
 data class CouponUrls(
@@ -29,4 +32,4 @@ data class CouponUrls(
     val pc: String,
     @SerializedName("sp")
     val sp: String
-)
+):Serializable

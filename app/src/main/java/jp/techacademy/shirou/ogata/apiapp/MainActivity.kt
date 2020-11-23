@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        my_toolbar.setTitle(R.string.app_name)
         // ViewPager2の初期化
         viewPager2.apply {
             adapter = viewPagerAdapter
@@ -30,8 +31,15 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         }.attach()
     }
 
-    override fun onClickItem(url: String) {
-        WebViewActivity.start(this, url)
+    override fun onClickItem(shop: Shop) {
+        WebViewActivity.start(this, shop)
+    }
+
+    //WebViewから戻ってきたときにお気に入り情報を更新しておく
+    override fun onRestart() {
+        super.onRestart()
+        (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_API] as ApiFragment).updateView()
+        (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_FAVORITE] as FavoriteFragment).updateData()
     }
 
     override fun onAddFavorite(shop: Shop) { // Favoriteに追加するときのメソッド(Fragment -> Activity へ通知する)
@@ -39,6 +47,7 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
             id = shop.id
             name = shop.name
             imageUrl = shop.logoImage
+            address = shop.address
             url = if (shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
         })
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_FAVORITE] as FavoriteFragment).updateData()

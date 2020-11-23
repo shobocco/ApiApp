@@ -35,7 +35,8 @@ class FavoriteFragment: Fragment() {
             }
             // Itemをクリックしたとき
             onClickItem = {
-                fragmentCallback?.onClickItem(it)
+                var shop = Shop(CouponUrls(it.url,it.url),it.id,it.imageUrl,it.name,it.address)
+                fragmentCallback?.onClickItem(shop)
             }
         }
         // RecyclerViewの初期化
