@@ -88,7 +88,7 @@ class ApiFragment: Fragment() {
         recyclerView.adapter?.notifyDataSetChanged() // RecyclerViewのAdapterに対して再描画のリクエストをする
     }
 
-    private fun updateData(isAdd: Boolean = false) {
+    fun updateData(isAdd: Boolean = false,searchText:String = getString(R.string.api_keyword)) {
         if (isLoading) {
             return
         } else {
@@ -105,7 +105,7 @@ class ApiFragment: Fragment() {
             .append("?key=").append(getString(R.string.api_key)) // Apiを使うためのApiKey
             .append("&start=").append(start) // 何件目からのデータを取得するか
             .append("&count=").append(COUNT) // 1回で20件取得する
-            .append("&keyword=").append(getString(R.string.api_keyword)) // お店の検索ワード。ここでは例として「ランチ」を検索
+            .append("&keyword=").append(searchText) // お店の検索ワード。ここでは例として「ランチ」を検索
             .append("&format=json") // ここで利用しているAPIは戻りの形をxmlかjsonが選択することができる。Androidで扱う場合はxmlよりもjsonの方が扱いやすいので、jsonを選択
             .toString()
         val client = OkHttpClient.Builder()

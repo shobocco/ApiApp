@@ -1,11 +1,19 @@
 package jp.techacademy.shirou.ogata.apiapp
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_web_view.*
 
 class MainActivity : AppCompatActivity(), FragmentCallback {
 
@@ -16,6 +24,7 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         setContentView(R.layout.activity_main)
 
         my_toolbar.setTitle(R.string.app_name)
+
         // ViewPager2の初期化
         viewPager2.apply {
             adapter = viewPagerAdapter
@@ -29,6 +38,20 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             tab.setText(viewPagerAdapter.titleIds[position])
         }.attach()
+        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            // "onTabSelected","onTabUnselected","onTabReselected"の3つを実装しないとエラー
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if(tab.position == 1){
+                  }else{
+                }
+             }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+            }
+        })
     }
 
     override fun onClickItem(shop: Shop) {
@@ -49,6 +72,7 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
             imageUrl = shop.logoImage
             address = shop.address
             url = if (shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
+            isFav = true
         })
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_FAVORITE] as FavoriteFragment).updateData()
     }

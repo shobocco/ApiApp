@@ -5,6 +5,8 @@
     <string name="tab_title_api">新着順</string>
     <string name="tab_title_favorite">お気に入り</string>
 
+    <string name="menu_search">検索</string>
+
     <!-- API通信i関連 -->
     <string name="base_url">https://webservice.recruit.co.jp/hotpepper/gourmet/v1/</string>
     <string name="api_key">5bc778fa759cf26f</string>

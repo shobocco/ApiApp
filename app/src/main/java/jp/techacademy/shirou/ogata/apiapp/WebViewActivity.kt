@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_web_view.*
 
@@ -40,8 +41,16 @@ class WebViewActivity: AppCompatActivity() {
         if(item?.itemId == R.id.favoritestar){
 
             if(FavoriteShop.findBy(shop.id) != null){
-                FavoriteShop.delete(shop.id)
-                item.setIcon(R.drawable.ic_star_border)
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_favorite_dialog_title)
+                    .setMessage(R.string.delete_favorite_dialog_message)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        FavoriteShop.delete(shop.id)
+                        item.setIcon(R.drawable.ic_star_border)
+                    }
+                    .setNegativeButton(android.R.string.cancel) { _, _ ->}
+                    .create()
+                    .show()
             }else{
                 FavoriteShop.insert(FavoriteShop().apply {
                     id = shop.id
