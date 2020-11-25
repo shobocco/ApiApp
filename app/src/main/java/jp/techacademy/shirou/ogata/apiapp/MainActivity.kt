@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         })
     }
 
+
+
     override fun onClickItem(shop: Shop) {
         WebViewActivity.start(this, shop)
     }

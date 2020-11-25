@@ -63,7 +63,7 @@ class FavoriteAdapter(private val context: Context): RecyclerView.Adapter<Recycl
         val data = items[position]
         holder.apply {
             rootView.apply {
-                setBackgroundColor(ContextCompat.getColor(context, if (position % 2 == 0) android.R.color.white else android.R.color.darker_gray)) // 偶数番目と機数番目で背景色を変更させる
+                setBackgroundColor(ContextCompat.getColor(context, if (position % 2 == 0) android.R.color.white else android.R.color.holo_blue_light)) // 偶数番目と機数番目で背景色を変更させる
                 setOnClickListener {
                     onClickItem?.invoke(data)
                 }

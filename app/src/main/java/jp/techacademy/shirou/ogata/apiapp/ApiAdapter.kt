@@ -84,7 +84,7 @@ class ApiAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVie
             rootView.apply {
                 // 偶数番目と奇数番目で背景色を変更させる
                 setBackgroundColor(ContextCompat.getColor(context,
-                    if (position % 2 == 0) android.R.color.white else android.R.color.darker_gray))
+                    if (position % 2 == 0) android.R.color.white else android.R.color.holo_blue_light))
                 setOnClickListener {
                     onClickItem?.invoke(data)
                 }
